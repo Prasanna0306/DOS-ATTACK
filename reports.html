@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reports</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 40%;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .dropdown {
+      margin-bottom: 30px;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #007bff;
+      color: white;
+    }
+
+    select:hover {
+      background-color: #0056b3;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .metrics-container {
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+    }
+
+    .metrics {
+      text-align: left;
+    }
+
+    .metrics p {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Reports</h1>
+    <form action="/view_report" method="POST">
+      <div class="dropdown">
+        <select name="model_report">
+          <option value="K-nearest Neighbour">K-nearest Neighbour</option>
+          <option value="Random Forest">Random Forest</option>
+          <option value="Decision Tree">Decision Tree</option>
+           <option value="Navies Baised">Navies Baised</option>
+            <option value="Logistic regression">Logistic regression</option>
+          <!-- Add more model options as needed -->
+        </select>
+      </div>
+      <input type="submit" value="View Report">
+    </form>
+
+    <div class="metrics-container">
+      <h2>Selected Model: {{ selected_model }}</h2>
+      {% if metrics %}
+        <div class="metrics">
+          <p>Accuracy (Train): {{ metrics.accuracy_train }}</p>
+          <p>Precision (Train): {{ metrics.precision_train }}</p>
+          <p>F1 Score (Train): {{ metrics.f1_score_train }}</p>
+          <p>Accuracy (Test): {{ metrics.accuracy_test }}</p>
+          <p>Precision (Test): {{ metrics.precision_test }}</p>
+          <p>F1 Score (Test): {{ metrics.f1_score_test }}</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
